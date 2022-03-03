@@ -4,7 +4,7 @@ declare idrac_user
 declare dnsmasq_file
 declare json_inventory
 declare power_off="no"
-declare existing_worker_nodes=$(( $((`oc get node --no-headers|grep worker|wc -l`)) + 1 ))
+declare existing_worker_nodes=$((`oc get node --no-headers|grep worker|wc -l`))
 function ctrl_c() {
         echo "** CTRL-C detected"
         exit
@@ -161,7 +161,7 @@ case "$response" in
 	ipmi_power_off
 	acceept_new_workers_certificates &
 	oc create -f workers
-	box_out "you can follow the deployment progress using \"oc get bmh\""
+	box_out "you can follow the deployment progress using \"oc get bmh -n openshift-machine-api\""
 
 
 
